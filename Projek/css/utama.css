@@ -1,0 +1,238 @@
+/* CSS untuk card */
+.tutorial-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+
+.tutorial-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* CSS untuk logo perusahaan dalam card */
+.logo-img {
+    max-width: 100px;
+    max-height: 100px;
+    margin-right: 20px;
+}
+
+/* CSS untuk card event */
+.box-side {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+
+.box-side:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* CSS untuk gambar poster event dalam card */
+.box-side img {
+    max-width: 100%;
+    border-radius: 8px;
+    transition: transform 0.3s;
+}
+
+.box-side:hover img {
+    transform: scale(1.02);
+}
+
+/* CSS untuk card testimonial */
+.testimonial-2 {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+
+.testimonial-2:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* CSS untuk gambar dalam card testimonial */
+.testimonial-2 img {
+    max-width: 100px;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.testimonial-2:hover img {
+    transform: scale(1.1);
+}
+
+/* CSS untuk card event */
+.post-entry-1 {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    height: 100%; /* Ensure the card takes full height of the column */
+}
+
+.post-entry-1:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.thumbnail-link img {
+    border-radius: 8px;
+    transition: transform 0.3s;
+}
+
+/* CSS untuk konten dalam card */
+.post-entry-1-contents {
+    padding-top: 20px;
+}
+
+/* CSS untuk modal */
+.modal-dialog {
+    max-width: 800px; /* Atur lebar maksimum modal */
+    margin: 30px auto;
+}
+
+.modal-content {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    border: none;
+}
+
+.modal-header {
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+    border-bottom: none;
+}
+
+.modal-header .close {
+    color: white;
+    opacity: 1;
+}
+
+.modal-header .close span {
+    font-size: 1.5rem;
+}
+
+.modal-header .modal-title {
+    color: white; /* Mengubah warna teks modal title menjadi putih */
+}
+
+.modal-body {
+    padding: 20px;
+    font-size: 1rem;
+}
+
+.modal-body .info-item {
+    margin-bottom: 15px;
+}
+
+.modal-body .info-item p {
+    margin: 0;
+}
+
+.modal-body .info-item strong {
+    color: #007bff;
+}
+
+.modal-footer {
+    background-color: #f1f1f1;
+    padding: 15px;
+    border-top: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-footer .btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.modal-footer .btn:hover {
+    background-color: #0056b3;
+}
+
+/* CSS untuk logo perusahaan di dalam modal */
+.logo-perusahaan {
+    max-width: 200px;
+    max-height: 100px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Tambahan CSS untuk memberikan efek hover pada modal */
+.modal-content:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s;
+}
+
+/* CSS untuk kontainer form dan hasil pencarian */
+.box {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* CSS untuk form pencarian */
+.form-container {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.form-container h4 {
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #555;
+}
+
+.form-control {
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+#search-results {
+    margin-top: 20px;
+}
+
+

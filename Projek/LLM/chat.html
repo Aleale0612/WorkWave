@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Groq API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .chat-container {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .chat-header {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            max-height: 400px;
+        }
+        .chat-message {
+            margin: 10px 0;
+        }
+        .chat-message.user {
+            text-align: right;
+        }
+        .chat-message.assistant {
+            text-align: left;
+        }
+        .chat-footer {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+        .chat-footer input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 0;
+        }
+        .chat-footer button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>JobAssist Datang Membantu</h1>
+        </div>
+        <div id="chat-messages" class="chat-messages"></div>
+        <div class="chat-footer">
+            <input type="text" id="question" name="question" placeholder="Tuliskan pertanyaan anda" required>
+            <button id="send-button">Kirim</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('send-button').addEventListener('click', async function () {
+            const question = document.getElementById('question').value;
+            if (question.trim() === '') return;
+
+            addMessage('user', question);
+            document.getElementById('question').value = '';
+
+            try {
+                const response = await fetch('groq.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ question })
+                });
+
+                const data = await response.json();
+                if (data.error) {
+                    addMessage('assistant', 'Error: ' + data.error);
+                } else if (Array.isArray(data.answer)) {
+                    let answerText = '';
+                    data.answer.forEach(answer => {
+                        answerText += `Posisi: ${answer.posisi}, Lokasi: ${answer.lokasi_bekerja}, Syarat: ${answer.syarat_pekerjaan}\n`;
+                    });
+                    addMessage('assistant', answerText);
+                } else {
+                    addMessage('assistant', data.answer);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                addMessage('assistant', 'Terjadi kesalahan.');
+            }
+        });
+
+        function addMessage(role, content) {
+            const messageElement = document.createElement('div');
+            messageElement.className = `chat-message ${role}`;
+            messageElement.innerText = content;
+            document.getElementById('chat-messages').appendChild(messageElement);
+            document.getElementById('chat-messages').scrollTop = document.getElementById('chat-messages').scrollHeight;
+        }
+    </script>
+</body>
+</html>

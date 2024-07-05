@@ -1,0 +1,169 @@
+.navbar {
+  overflow: hidden;
+  background-color: #333; /* Warna latar belakang navbar */
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2; /* Warna teks */
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  background-color: #ddd; /* Warna latar belakang saat dihover */
+  color: black; /* Warna teks saat dihover */
+}
+
+.navbar div {
+  float: right;
+}
+
+.navbar img {
+  margin-top: 0px;
+}
+
+.navbar span {
+  display: inline-block;
+  color: #f2f2f2;
+  padding: 14px 16px;
+}
+
+/* Clear floats after the navbar */
+.navbar:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body,
+.package-title,
+.package-benefits li,
+button {
+  
+}
+
+html,
+body {
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+.container1 {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.package-item {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.package-item:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+.package-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 15px 0;
+}
+
+.package-price {
+  font-size: 22px;
+  color: #f15a29;
+  margin-bottom: 15px;
+}
+
+.package-benefits {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 15px;
+}
+
+.package-benefits li {
+  margin-bottom: 10px;
+}
+
+.title img {
+  width: 150px;
+  height: 175px;
+}
+.purchase-button {
+  background-color: #f15a29;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.purchase-button:hover {
+  background-color: #d04922;
+}
+
+
+#bayarsatu{
+  margin-top: 10px;
+}
+
+#bayardua{
+  margin-top: 40px;
+}
+
+#bayartiga{
+  margin-top: 40px;
+}
+
+
+/* Media queries untuk desain responsif */
+@media screen and (max-width: 768px) {
+  .package-item {
+    width: calc(50% - 10px); /* Ubah lebar item menjadi 50% ketika lebar layar maksimum 768px */
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .package-item {
+    width: calc(100% - 10px); /* Ubah lebar item menjadi 100% ketika lebar layar maksimum 576px */
+  }
+}
+
+.button-gold{
+  padding-top: 50px;
+}
+
+.button-silver{
+  padding-top: 120px;
+}
+
+.button-bronze{
+  padding-top:220px;
+}
+@media screen and (max-width: 600px) {
+    .card {
+        width: 100%;
+        margin: 20px 0;
+    }
+}
+
+.title{
+  color: white
+}

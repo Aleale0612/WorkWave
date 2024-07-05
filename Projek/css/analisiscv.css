@@ -1,0 +1,47 @@
+/* General styling for the form container */
+.analisiscv {
+  max-width: 500px; /* sets the width of the form */
+  margin: 20px auto; /* centers the form on the page */
+  padding: 20px;
+  background-color: #f4f4f4; /* light grey background */
+  border-radius: 8px; /* rounded corners */
+  box-shadow: 0 0 15px rgba(0,0,0,0.1); /* subtle shadow */
+}
+
+/* Styling for form elements */
+.analisiscv form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Styling labels */
+.analisiscv label {
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Styling input fields */
+.analisiscv input[type="file"] {
+  margin-bottom: 20px; /* adds space below the input field */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.analisiscv input[type="submit"] {
+  font-size: 18px;
+  color: white;
+  background-color: #0056b3; /* blue background */
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer; /* cursor changes to pointer when hovering over the button */
+  transition: background-color 0.3s;
+}
+
+/* Hover effect for submit button */
+.analisiscv input[type="submit"]:hover {
+  background-color: #004494; /* darker blue when hovered */
+}

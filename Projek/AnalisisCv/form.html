@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload CV dan Surat Lamaran Kerja</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Upload CV dan Surat Lamaran Kerja</h1>
+    <form action="groq.php" method="post" enctype="multipart/form-data">
+        <label for="cv">Upload CV (PDF):</label>
+        <input type="file" name="cv" id="cv" accept="application/pdf" required><br><br>
+        <label for="cover_letter">Upload Surat Lamaran Kerja (PDF):</label>
+        <input type="file" name="cover_letter" id="cover_letter" accept="application/pdf" required><br><br>
+        <input type="submit" value="Upload dan Analisis">
+    </form>
+</body>
+</html>
