@@ -11,8 +11,8 @@ while ($row = $lowonganResult->fetch_assoc()) {
     $lowonganData[] = $row['count'];
 }
 
-// Fetch data for perusahaan chart
-$perusahaanQuery = "SELECT MONTH(created_at) AS month, COUNT(*) AS count FROM users GROUP BY MONTH(created_at)";
+// Fetch data for perusahaan chart with status 'diterima'
+$perusahaanQuery = "SELECT MONTH(created_at) AS month, COUNT(*) AS count FROM users WHERE status = 'diterima' GROUP BY MONTH(created_at)";
 $perusahaanResult = $koneksi->query($perusahaanQuery);
 $perusahaanData = [];
 $perusahaanLabels = [];
