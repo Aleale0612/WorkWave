@@ -73,6 +73,7 @@ $packages = $result->fetch_all(MYSQLI_ASSOC);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-9zm0L8TLN8ymMiJv"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
   </head>
 
   <body>
@@ -106,8 +107,8 @@ $packages = $result->fetch_all(MYSQLI_ASSOC);
                                     <li><a href="login.php" class="nav-link">Masuk</a></li>
                                 <?php endif; ?>
                                 <?php if ($user_id): ?>
-                                    <li class="active"><a href="lowongan.php?status=<?= $status ?>&user_id=<?= $user_id ?>&package_purchased=<?= $package_purchased ?>" class="nav-link">Lowongan</a><span class="badge badge-info"><?= $limit_publish_users ?></span></li>
-                                    <li><a href="paket.php?status=<?= $status ?>&user_id=<?= $user_id ?>&package_purchased=<?= $package_purchased ?>" class="nav-link">Beli Paket</a></li>
+                                    <li><a href="lowongan.php?status=<?= $status ?>&user_id=<?= $user_id ?>&package_purchased=<?= $package_purchased ?>" class="nav-link">Lowongan</a><span class="badge badge-info"><?= $limit_publish_users ?></span></li>
+                                    <li class="active"><a href="paket.php?status=<?= $status ?>&user_id=<?= $user_id ?>&package_purchased=<?= $package_purchased ?>" class="nav-link">Beli Paket</a></li>
                                     <li><a href="analisiscv.php?status=<?= $status ?>&user_id=<?= $user_id ?>&package_purchased=<?= $package_purchased ?>" class="nav-link">Analisis CV</a></li>
                                     <li><a href="profil.php?status=<?= $status ?>&user_id=<?= $user_id ?>&package_purchased=<?= $package_purchased ?>" class="nav-link">Profil</a></li>
                                     <li><a href="logout.php" class="nav-link">Keluar</a></li>
@@ -211,7 +212,7 @@ $packages = $result->fetch_all(MYSQLI_ASSOC);
     $('.purchase-button').click(function() {
         var packageId = $(this).data('package-id');
         $.ajax({
-            url: 'midtrans/vendor/midtrans/midtrans-php/Midtrans/payment.php', // Update to the correct path
+            url: 'midtrans/vendor/midtrans/midtrans-php/Midtrans/payment.php', // Update ke path yang benar
             type: 'POST',
             data: {
                 package_id: packageId
@@ -221,52 +222,81 @@ $packages = $result->fetch_all(MYSQLI_ASSOC);
                 if (response.snapToken) {
                     snap.pay(response.snapToken, {
                         onSuccess: function(result){
-                            alert("payment success!"); 
-                            console.log(result);
-                            // Send transaction details to server
-                            $.ajax({
-                                url: 'save_transaction.php', // New endpoint to save transaction
-                                type: 'POST',
-                                data: {
-                                    user_id: <?= $user_id ?>, // Ensure user_id is sent correctly
-                                    package_id: packageId,
-                                    order_id: result.order_id,
-                                    transaction_status: 'success', // Hardcode status to success
-                                    gross_amount: result.gross_amount,
-                                    payment_type: result.payment_type
-                                },
-                                success: function(saveResponse) {
-                                    console.log("Transaction saved: ", saveResponse);
-                                    window.location.href = 'lowongan.php';
-                                },
-                                error: function(saveXhr, saveStatus, saveError) {
-                                    console.error("Save transaction error: ", saveStatus, saveError);
-                                }
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Pembayaran berhasil!',
+                                text: 'Terima kasih atas pembayaran Anda.'
+                            }).then(() => {
+                                // Kirim detail transaksi ke server
+                                $.ajax({
+                                    url: 'save_transaction.php', // Endpoint baru untuk menyimpan transaksi
+                                    type: 'POST',
+                                    data: {
+                                        user_id: <?= $user_id ?>, // Pastikan user_id dikirim dengan benar
+                                        package_id: packageId,
+                                        order_id: result.order_id,
+                                        transaction_status: 'success', // Status hardcode menjadi success
+                                        gross_amount: result.gross_amount,
+                                        payment_type: result.payment_type
+                                    },
+                                    success: function(saveResponse) {
+                                        console.log("Transaksi disimpan: ", saveResponse);
+                                        setTimeout(function() {
+                                            window.location.href = 'lowongan.php';
+                                        }, 3000); // Delay count
+                                    },
+                                    error: function(saveXhr, saveStatus, saveError) {
+                                        console.error("Error menyimpan transaksi: ", saveStatus, saveError);
+                                    }
+                                });
                             });
+                            console.log(result);
                         },
                         onPending: function(result){
-                            alert("waiting for your payment!"); 
+                            Swal.fire({
+                                icon: 'info',
+                                title: 'Menunggu pembayaran Anda!',
+                                text: 'Silakan selesaikan pembayaran Anda.'
+                            });
                             console.log(result);
                         },
                         onError: function(result){
-                            alert("payment failed!"); 
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Pembayaran gagal!',
+                                text: 'Terjadi kesalahan saat pembayaran. Silakan coba lagi.'
+                            });
                             console.log(result);
                         },
                         onClose: function(){
-                            alert('you closed the popup without finishing the payment');
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Pembayaran belum selesai!',
+                                text: 'Anda menutup popup tanpa menyelesaikan pembayaran.'
+                            });
                         }
                     });
                 } else {
-                    alert("Error: " + response.error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: response.error
+                    });
                 }
             },
             error: function(xhr, status, error) {
                 console.error("AJAX Error:", status, error);
-                alert("An AJAX error occurred. Please try again.");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error AJAX!',
+                    text: 'Terjadi kesalahan AJAX. Silakan coba lagi.'
+                });
             }
         });
     });
 });
+
+
       </script>
   </body>
 </html>

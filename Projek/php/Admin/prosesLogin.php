@@ -10,6 +10,11 @@ if (isset($_POST['login'])) {
     $username = $_POST['log-username'];
     $password = $_POST['log-password'];
 
+    // Initialize login attempts if not set
+    if (!isset($_SESSION['login_attempts'])) {
+        $_SESSION['login_attempts'] = 0;
+    }
+
     // Check if username and password are not empty
     if (!empty($username) && !empty($password)) {
         // Prepare and bind
@@ -23,6 +28,9 @@ if (isset($_POST['login'])) {
             if (password_verify($password, $user_data['password'])) {
                 $status = $user_data['status'];
                 $package_purchased = $user_data['package_purchased'];
+
+                // Reset login attempts on successful login
+                $_SESSION['login_attempts'] = 0;
 
                 // Check user status
                 if ($status == 'diterima') {
@@ -60,6 +68,7 @@ if (isset($_POST['login'])) {
                     exit();
                 } elseif ($status == 'menunggu') {
                     // Alert 1 "menunggu"
+                    echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>";
                     echo "<script>
                             document.addEventListener('DOMContentLoaded', function() {
                               Swal.fire({
@@ -77,6 +86,7 @@ if (isset($_POST['login'])) {
                     exit();
                 } elseif ($status == 'ditolak') {
                     // Alert 2 "ditolak"
+                    echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>";
                     echo "<script>
                             document.addEventListener('DOMContentLoaded', function() {
                               Swal.fire({
@@ -94,12 +104,14 @@ if (isset($_POST['login'])) {
                     exit();
                 }
             } else {
+                $_SESSION['login_attempts']++;
                 // Alert 3
+                echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>";
                 echo "<script>
                         document.addEventListener('DOMContentLoaded', function() {
                           Swal.fire({
                             title: 'Error',
-                            text: 'Username dan password salah!',
+                            text: 'Username dan password salah! Anda memiliki " . (3 - $_SESSION['login_attempts']) . " kesempatan untuk mencoba.',
                             icon: 'error',
                             confirmButtonText: 'OK'
                           }).then((result) => {
@@ -112,12 +124,14 @@ if (isset($_POST['login'])) {
                 exit();
             }
         } else {
+            $_SESSION['login_attempts']++;
             // Alert 3
+            echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>";
             echo "<script>
                     document.addEventListener('DOMContentLoaded', function() {
                       Swal.fire({
                         title: 'Error',
-                        text: 'Username dan password salah!',
+                        text: 'Username dan password salah! Anda memiliki " . (3 - $_SESSION['login_attempts']) . " kesempatan untuk mencoba.',
                         icon: 'error',
                         confirmButtonText: 'OK'
                       }).then((result) => {
@@ -134,6 +148,7 @@ if (isset($_POST['login'])) {
         $stmt->close();
     } else {
         // Alert 4
+        echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>";
         echo "<script>
                 document.addEventListener('DOMContentLoaded', function() {
                   Swal.fire({
