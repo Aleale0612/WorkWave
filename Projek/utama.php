@@ -610,16 +610,16 @@ $event_result = $koneksi->query($event_query);
                         <div class="col-lg-3">
                             <h2 class="footer-heading mb-4"></h2>
                             <ul class="list-unstyled">
-                                <li><a href="bursakerja.html">Bursa Kerja</a></li>
-                                <li><a href="#">Partisipasi Bursa Kerja</a></li>
+                                <li><a href="bursakerja.php">Bursa Kerja</a></li>
+                                <li><a href="uploadbk.php">Partisipasi Bursa Kerja</a></li>
                             </ul>
                         </div>
                         <div class="col-lg-3">
                             <h2 class="footer-heading mb-4"></h2>
                             <ul class="list-unstyled">
-                                <li><a href="registrasi.html">Registrasi</a></li>
-                                <li><a href="login.html">Masuk</a></li>
-                                <li><a href="#">Beli paket</a></li>
+                                <li><a href="registrasi.php">Registrasi</a></li>
+                                <li><a href="login.php">Masuk</a></li>
+                                <li><a href="paket.php">Beli paket</a></li>
                             </ul>
                         </div>
                     </div>
