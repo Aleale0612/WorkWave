@@ -1,9 +1,12 @@
 <?php
+//koneksi ke database
+include "koneksi.php";
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 session_start();
 
-// Periksa apakah admin sudah login
+// Periksa admin login
 if (!isset($_SESSION['admin_username'])) {
     // Redirect ke halaman login jika admin belum login
     header("Location: loginAdmin.php");
@@ -12,9 +15,6 @@ if (!isset($_SESSION['admin_username'])) {
 
 // Ambil nama admin dari session
 $admin_username = $_SESSION['admin_username'];
-
-// Panggil koneksi ke database
-include "koneksi.php";
 
 // Query untuk mengambil nama admin dari tabel admin
 $sql = "SELECT Nama FROM admin WHERE Username = ?";
@@ -61,21 +61,22 @@ $perusahaanTerbaruResult = $koneksi->query($perusahaanTerbaruQuery);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="css/adminpageboard.css">
+    <link rel="stylesheet" href="css/dashboardadmin.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 <div class="sidebar-wrapper">
         <div class="sidebar">
             <div class="sidebar-header">
-            <h2><strong>W</strong>ork<strong>W</strong>ave</h2>
+                <h2><strong>W</strong>ork<strong>W</strong>ave</h2>
             </div>
             <ul class="sidebar-menu">
                 <li><a href="AdminPage.php">Dashboard</a></li>
                 <li><a href="dataPerusahaan.php">Data Perusahaan</a></li>
-                <li><a href="dataLoker.php">Data Lowongan Pekerjaan</a></li> 
+                <li><a href="dataLoker.php">Data Lowongan Pekerjaan</a></li>
                 <li><a href="dataAdmin.php">Admin</a></li>
                 <li><a href="databursakerja.php">Job Fair</a></li>
                 <li><a href="logout.php" class="btn btn-danger">Keluar</a></li>
@@ -89,7 +90,7 @@ $perusahaanTerbaruResult = $koneksi->query($perusahaanTerbaruQuery);
                 <p>Ruang Kerja Kamu.</p>
             </div>
             <div class="user-info">
-            <p>Powered by <strong>Kuadran</strong/p>
+                <p>Powered by <strong>Kuadran</strong></p>
             </div>
         </header>
         <div class="content">
@@ -113,11 +114,11 @@ $perusahaanTerbaruResult = $koneksi->query($perusahaanTerbaruQuery);
             </div>
             <div class="charts">
                 <div class="chart-container">
-                    <h2>Grafik Lowongan</h2>
-                    <canvas id="lowonganChart"></canvas>
+                    <h2 id="Grafik-title">Grafik Transaksi</h2>
+                    <canvas id="transactionsChart"></canvas>
                 </div>
-                <div class="chart-container">
-                    <h2>Grafik Perusahaan</h2>
+                <div class="chart-container2">
+                    <h2 id="Grafik-title2">Grafik Perusahaan</h2>
                     <canvas id="perusahaanChart"></canvas>
                 </div>
             </div>
@@ -166,60 +167,147 @@ $perusahaanTerbaruResult = $koneksi->query($perusahaanTerbaruQuery);
         </div>
     </div>
     <script>
-        // Fetch data for charts from prosesGrafik1.php
+        // Fetch data for charts from GrafikAdmin.php
+    $.ajax({
+        url: 'GrafikAdmin.php',
+        method: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            if (data.error) {
+                console.error('Data retrieval failed:', data.error);
+                return;
+            }
+
+            let totalGold = data.transactions.data.reduce((acc, item) => acc + item.gold, 0);
+            let totalSilver = data.transactions.data.reduce((acc, item) => acc + item.silver, 0);
+            let totalBronze = data.transactions.data.reduce((acc, item) => acc + item.bronze, 0);
+
+            var ctx1 = document.getElementById('transactionsChart').getContext('2d');
+            var transactionsChart = new Chart(ctx1, {
+                type: 'pie',
+                data: {
+                    labels: ['Gold', 'Silver', 'Bronze'],
+                    datasets: [{
+                        label: 'Transactions',
+                        data: [totalGold, totalSilver, totalBronze],
+                        backgroundColor: [
+                            'rgba(255, 215, 0, 0.2)',
+                            'rgba(192, 192, 192, 0.2)',
+                            'rgba(205, 127, 50, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 215, 0, 1)',
+                            'rgba(192, 192, 192, 1)',
+                            'rgba(205, 127, 50, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    return tooltipItem.label + ': ' + tooltipItem.raw.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            var ctx2 = document.getElementById('perusahaanChart').getContext('2d');
+            var perusahaanChart = new Chart(ctx2, {
+                type: 'line',
+                data: {
+                    labels: data.perusahaan.labels,
+                    datasets: [{
+                        label: '# of Perusahaan',
+                        data: data.perusahaan.data,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error('Error fetching chart data:', error);
+        }
+    });
+    
+    document.getElementById('Grafik-title').addEventListener('click', function() {
         $.ajax({
-            url: 'prosesGrafik1.php',
+            url: 'GrafikAdmin.php',
             method: 'GET',
             dataType: 'json',
             success: function(data) {
-                var ctx1 = document.getElementById('lowonganChart').getContext('2d');
-                var lowonganChart = new Chart(ctx1, {
-                    type: 'bar',
-                    data: {
-                        labels: data.lowongan.labels,
-                        datasets: [{
-                            label: '# of Lowongan',
-                            data: data.lowongan.data,
-                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
+                if (data.error) {
+                    console.error('Data retrieval failed:', data.error);
+                    return;
+                }
 
-                var ctx2 = document.getElementById('perusahaanChart').getContext('2d');
-                var perusahaanChart = new Chart(ctx2, {
-                    type: 'line',
-                    data: {
-                        labels: data.perusahaan.labels,
-                        datasets: [{
-                            label: '# of Perusahaan',
-                            data: data.perusahaan.data,
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
+                let totalGold = data.transactions.data.reduce((acc, item) => acc + item.gold, 0);
+                let totalSilver = data.transactions.data.reduce((acc, item) => acc + item.silver, 0);
+                let totalBronze = data.transactions.data.reduce((acc, item) => acc + item.bronze, 0);
+                let totalTransactions = totalGold + totalSilver + totalBronze;
+
+                Swal.fire({
+                    title: 'Total Transaksi Berhasil saat ini',
+                    html: `
+                        <strong>Gold:</strong> ${totalGold.toLocaleString()}<br>
+                        <strong>Silver:</strong> ${totalSilver.toLocaleString()}<br>
+                        <strong>Bronze:</strong> ${totalBronze.toLocaleString()}<br>
+                        <strong>Total:</strong> ${totalTransactions.toLocaleString()}
+                    `,
+                    icon: 'info'
                 });
             },
             error: function(xhr, status, error) {
                 console.error('Error fetching chart data:', error);
             }
         });
-    </script>
+    });
+
+    document.getElementById('Grafik-title2').addEventListener('click', function() {
+        $.ajax({
+            url: 'GrafikAdmin.php',
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                if (data.error) {
+                    console.error('Data retrieval failed:', data.error);
+                    return;
+                }
+
+                let infoText = '';
+                data.perusahaan.labels.forEach((month, index) => {
+                    infoText += `<strong>Bulan ${month}:</strong> ${data.perusahaan.data[index]} perusahaan<br>`;
+                });
+
+                Swal.fire({
+                    title: 'Informasi Total Perusahaan',
+                    html: infoText,
+                    icon: 'info'
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching chart data:', error);
+            }
+        });
+    });
+        </script>
+
 </body>
 </html>
