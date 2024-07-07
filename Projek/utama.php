@@ -129,6 +129,30 @@ $total_pages_event = ceil($total_event / $records_per_page_event);
 // Fetch event records for the current page
 $event_query = "SELECT id, nama_acara, deskripsi_acara, foto_poster FROM event LIMIT $records_per_page_event OFFSET $offset_event";
 $event_result = $koneksi->query($event_query);
+
+if (isset($_GET['ajax'])) {
+    // Return the job results as JSON if the request is via AJAX
+    $jobs = [];
+    while ($row = $loker_result->fetch_assoc()) {
+        $jobs[] = $row;
+    }
+
+    // Return the event results as JSON if the request is via AJAX
+    $events = [];
+    while ($event_row = $event_result->fetch_assoc()) {
+        $events[] = $event_row;
+    }
+
+    echo json_encode([
+        'jobs' => $jobs,
+        'total_pages' => $total_pages,
+        'current_page' => $current_page,
+        'events' => $events,
+        'total_pages_event' => $total_pages_event,
+        'current_page_event' => $current_page_event
+    ]);
+    exit;
+}
 ?>
 
 <!doctype html>
@@ -147,7 +171,7 @@ $event_result = $koneksi->query($event_query);
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/aos.css">
-    <link rel="stylesheet" href="css/utamastyle123.css">
+    <link rel="stylesheet" href="css/utamastyleutama.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/searchhjobb.js"></script>
     <style>
@@ -331,7 +355,7 @@ $event_result = $koneksi->query($event_query);
             <div class="container">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-lg-10 text-center">
-                        <h1><strong>W</strong>ork<strong>W</strong>ave</h1>
+                        <h1><strong>Ruang </strong>Pelamar <strong>Kerja</strong></h1>
                     </div>
                 </div>
             </div>
@@ -456,7 +480,7 @@ $event_result = $koneksi->query($event_query);
                         <p>Tidak ada data lowongan kerja.</p>
                     <?php endif; ?>
                     <div class="custom-pagination">
-                        <ul class="list-unstyled">
+                        <ul id="pagination" class="list-unstyled">
                             <?php for ($i = 1; $i <= max($total_pages, $total_pages_event); $i++) : ?>
                                 <li><a href="?page=<?= $i ?>"><span><?= $i ?></span></a></li>
                             <?php endfor; ?>
@@ -480,7 +504,7 @@ $event_result = $koneksi->query($event_query);
 
     <!-- Navigasi Paginasi -->
     <div class="custom-pagination">
-        <ul class="list-unstyled">
+        <ul id="pagination-event" class="list-unstyled">
             <?php for ($i = 1; $i <= $total_pages_event; $i++) : ?>
                 <li><a href="?page_event=<?= $i ?>"><span><?= $i ?></span></a></li>
             <?php endfor; ?>
@@ -702,6 +726,8 @@ $event_result = $koneksi->query($event_query);
             document.getElementById('chat-messages').appendChild(messageElement);
             document.getElementById('chat-messages').scrollTop = document.getElementById('chat-messages').scrollHeight;
         }
+
+        
     </script>
     </script>
     </script>

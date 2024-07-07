@@ -54,7 +54,7 @@ $result = $koneksi->query($query);
     <link rel="stylesheet" href="css/aos.css">
 
     <!-- MAIN CSS -->
-    <link rel="stylesheet" href="css/utamastyle123.css">
+    <link rel="stylesheet" href="css/utamastyleutama.css">
 
     <style>
         .thumbnail-link img {
@@ -151,8 +151,8 @@ $result = $koneksi->query($query);
                 <div class="post-entry-1 h-100 text-center">
                     <img src="images/rakha.jpg" alt="Developer 1" class="img-fluid rounded-circle mb-4">
                     <div class="post-entry-1-contents">
-                        <h2>Muhammad Rakha Savero Zulni</h2>
-                        <p>bla bla bla.</p>
+                        <h2>Muhammad Rakha Savero Zulni<p>(22523161)</p></h2>
+                        <p>Back End Engineer &  API Integration Engineer</p>
                     </div>
                 </div>
             </div>
@@ -160,17 +160,8 @@ $result = $koneksi->query($query);
                 <div class="post-entry-1 h-100 text-center">
                     <img src="images/ferrel.jpg" alt="Muhammad Ferrel Ganendra Arisaputra" class="img-fluid rounded-circle mb-4">
                     <div class="post-entry-1-contents">
-                        <h2>Muhammad Ferrel Ganendra Arisaputra</h2>
-                        <p>bla bla bla.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="post-entry-1 h-100 text-center">
-                    <img src="images/Gusti.jpg" alt="Farhan Gusti Pamungkas" class="img-fluid rounded-circle mb-4">
-                    <div class="post-entry-1-contents">
-                        <h2>Farhan Gusti Pamungkas</h2>
-                        <p>(Back End) Developer</p>
+                        <h2>Muhammad Ferrel Ganendra Arisaputra<p>(22523054)</p></h2>
+                        <p>Front End Developer & Front End Engineer</p>
                     </div>
                 </div>
             </div>
@@ -178,12 +169,22 @@ $result = $koneksi->query($query);
                 <div class="post-entry-1 h-100 text-center">
                     <img src="images/dinda.jpg" alt="Adinda Atzalia Ramadhanti Bukian" class="img-fluid rounded-circle mb-4">
                     <div class="post-entry-1-contents">
-                        <h2>Adinda Atzalia Ramadhanti Bukian</h2>
-                        <p>bla bla bla.</p>
+                        <h2>Adinda Atzalia Ramadhanti Bukian <p>(22523101)</p></h2>
+                        <p>Front End Developer & Front End Engineer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="post-entry-1 h-100 text-center">
+                    <img src="images/Gusti.jpg" alt="Farhan Gusti Pamungkas" class="img-fluid rounded-circle mb-4">
+                    <div class="post-entry-1-contents">
+                        <h2>Farhan Gusti Pamungkas<p>(22523091)</p></h2>
+                        <p>Back End Developer & Front End Engineer</p>
                     </div>
                 </div>
             </div>
         </div>
+        
 
     <footer class="site-footer">
         <div class="container">
