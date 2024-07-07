@@ -304,6 +304,7 @@ $event_result = $koneksi->query($event_query);
                         </span>
                         <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
                             <ul class="site-menu main-menu js-clone-nav ml-auto">
+                                <li><a href="tentangkami.php" class="nav-link">Tentang Kami</a></li>
                                 <li class="active"><a href="utama.php" class="nav-link">Utama</a></li>
                                 <li><a href="grafik.php" class="nav-link">Grafik</a></li>
                                 <li><a href="bursakerja.php" class="nav-link">Bursa Kerja</a></li>
