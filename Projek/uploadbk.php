@@ -51,11 +51,13 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
       <div class="container">
         <div class="row align-items-center position-relative">
 
-          <div class="col-3">
-            <div class="site-logo">
-              <a href="index.html"><strong>Work</strong>Wave</a>
-            </div>
-          </div>
+        <div class="col-2">
+                        <div class="site-logo">
+                            <a href="utama.php">
+                                <img src="images/logo.png" alt="WorkWave Logo" width="175px">
+                            </a>
+                        </div>
+                    </div>
 
           <div class="col-9  text-right">
 

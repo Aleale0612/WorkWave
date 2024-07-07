@@ -54,7 +54,7 @@ $result = $koneksi->query($query);
     <link rel="stylesheet" href="css/aos.css">
 
     <!-- MAIN CSS -->
-    <link rel="stylesheet" href="css/bursastyle.css">
+    <link rel="stylesheet" href="css/utamastyle123.css">
 
     <style>
         .thumbnail-link img {
@@ -86,7 +86,7 @@ $result = $koneksi->query($query);
             <div class="col-2">
                 <div class="site-logo">
                     <a href="utama.php">
-                        <img src="images/logo.png" alt="WorkWave Logo" class="logo-image">
+                        <img src="images/logo.png" alt="WorkWave Logo" class="logo-image" width="175px">
                     </a>
                 </div>
             </div>
@@ -120,72 +120,6 @@ $result = $koneksi->query($query);
     </div>
 </header>
 
-
-<style>
-    .site-navbar {
-    padding: 10px 0;
-}
-
-.site-logo {
-    display: flex;
-    align-items: center;
-}
-
-.site-logo a {
-    font-size: 24px;
-    color: #000;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-}
-
-.logo-image {
-    max-height: 175px; /* Adjust the size as needed */
-    padding-right: 500px; /* Space between logo and text */
-    padding-bottom: 60px;
-}
-
-.site-navigation {
-    display: flex;
-    justify-content: flex-end;
-    padding-bottom: 75px;
-}
-
-.site-menu {
-    display: flex;
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
-    flex-wrap: nowrap; /* Prevent wrapping */
-}
-
-.site-menu li {
-    margin-left: 20px;
-    white-space: nowrap; /* Prevent wrapping of text */
-}
-
-.site-menu li a {
-    text-decoration: none;
-    color: #000;
-    font-weight: bold;
-    display: inline-block; /* Ensure the whole text stays in one line */
-}
-
-.site-menu .badge {
-    margin-left: 5px;
-}
-
-@media (max-width: 991.98px) {
-    .site-logo {
-        flex: 0 0 auto;
-        width: auto;
-    }
-
-    .site-navigation {
-        flex: 1;
-    }
-}
-</style>
 
         <div class="site-section-cover overlay" style="background-image: url('images/Image5.jpg');">
 
@@ -233,10 +167,10 @@ $result = $koneksi->query($query);
             </div>
             <div class="col-lg-3 col-md-6 mb-4">
                 <div class="post-entry-1 h-100 text-center">
-                    <img src="images/gusti.jpg" alt="Farhan Gusti Pamungkas" class="img-fluid rounded-circle mb-4">
+                    <img src="images/Gusti.jpg" alt="Farhan Gusti Pamungkas" class="img-fluid rounded-circle mb-4">
                     <div class="post-entry-1-contents">
                         <h2>Farhan Gusti Pamungkas</h2>
-                        <p>bla bla bla.</p>
+                        <p>(Back End) Developer</p>
                     </div>
                 </div>
             </div>
@@ -276,16 +210,16 @@ $result = $koneksi->query($query);
                         <div class="col-lg-3">
                             <h2 class="footer-heading mb-4"></h2>
                             <ul class="list-unstyled">
-                                <li><a href="blog.html">Bursa Kerja</a></li>
-                                <li><a href="#">Partisipasi Bursa Kerja</a></li>
+                                <li><a href="bursakerja.php">Bursa Kerja</a></li>
+                                <li><a href="uploadbk.php">Partisipasi Bursa Kerja</a></li>
                             </ul>
                         </div>
                         <div class="col-lg-3">
                             <h2 class="footer-heading mb-4"></h2>
                             <ul class="list-unstyled">
-                                <li><a href="registrasi.html">Registrasi</a></li>
-                                <li><a href="login.html">Masuk</a></li>
-                                <li><a href="#">Beli paket</a></li>
+                                <li><a href="registrasi.php">Registrasi</a></li>
+                                <li><a href="login.php">Masuk</a></li>
+                                <li><a href="login.php">Beli paket</a></li>
                             </ul>
                         </div>
                     </div>

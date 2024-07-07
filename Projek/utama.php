@@ -147,8 +147,7 @@ $event_result = $koneksi->query($event_query);
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/aos.css">
-    <link rel="stylesheet" href="css/styleutama.css">
-    <link rel="stylesheet" href="css/utama.css">
+    <link rel="stylesheet" href="css/utamastyle123.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/searchhjobb.js"></script>
     <style>
@@ -272,13 +271,13 @@ $event_result = $koneksi->query($event_query);
                 right: 20px;
             }
         }
+    
+        
     </style>
 </head>
 
 <body>
-    <div class="site
-
--wrap" id="home-section">
+    <div class="site-wrap" id="home-section">
         <div class="site-mobile-menu site-navbar-target">
             <div class="site-mobile-menu-header">
                 <div class="site-mobile-menu-close mt-3">
@@ -291,12 +290,14 @@ $event_result = $koneksi->query($event_query);
         <header class="site-navbar light site-navbar-target" role="banner">
             <div class="container">
                 <div class="row align-items-center position-relative">
-                    <div class="col-3">
+                    <div class="col-2">
                         <div class="site-logo">
-                            <a href="utama.php"><strong>W</strong>ork<strong>W</strong>ave</a>
+                            <a href="utama.php">
+                                <img src="images/logo.png" alt="WorkWave Logo" width="175px">
+                            </a>
                         </div>
                     </div>
-                    <div class="col-9 text-right">
+                    <div class="col-10 text-right">
                         <span class="d-inline-block d-lg-none">
                             <a href="#" class="site-menu-toggle js-menu-toggle py-5">
                                 <span class="icon-menu h3 text-black"></span>
@@ -304,23 +305,23 @@ $event_result = $koneksi->query($event_query);
                         </span>
                         <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
                             <ul class="site-menu main-menu js-clone-nav ml-auto">
-                                <li><a href="tentangkami.php" class="nav-link">Tentang Kami</a></li>
-                                <li class="active"><a href="utama.php" class="nav-link">Utama</a></li>
-                                <li><a href="grafik.php" class="nav-link">Grafik</a></li>
-                                <li><a href="bursakerja.php" class="nav-link">Bursa Kerja</a></li>
-                                <?php if (!$user_id) : ?>
-                                    <li><a href="registrasi.php" class="nav-link">Registrasi</a></li>
-                                    <li><a href="login.php" class="nav-link">Masuk</a></li>
-                                <?php endif; ?>
-                                <?php if ($user_id) : ?>
-                                    <li><a href="lowongan.php" class="nav-link">Lowongan</a><span class="badge badge-info"><?= $limit_publish_users ?></span></li>
-                                    <li><a href="paket.php" class="nav-link">Beli Paket</a></li>
-                                    <li><a href="analisiscv.php" class="nav-link">Analisis CV</a></li>
-                                    <li><a href="profil.php" class="nav-link">Profil</a></li>
-                                    <li><a href="logout.php" class="nav-link">Keluar</a></li>
-                                <?php endif; ?>
-                            </ul>
-                        </nav>
+                        <li><a href="tentangkami.php" class="nav-link">Tentang Kami</a></li>
+                        <li class="active"><a href="utama.php" class="nav-link">Utama</a></li>
+                        <li><a href="grafik.php" class="nav-link">Grafik</a></li>
+                        <li><a href="bursakerja.php" class="nav-link">Bursa Kerja</a></li>
+                        <?php if (!$user_id) : ?>
+                            <li><a href="registrasi.php" class="nav-link">Registrasi</a></li>
+                            <li><a href="login.php" class="nav-link">Masuk</a></li>
+                        <?php endif; ?>
+                        <?php if ($user_id) : ?>
+                            <li><a href="lowongan.php" class="nav-link">Lowongan</a><span class="badge badge-info"><?= $limit_publish_users ?></span></li>
+                            <li><a href="paket.php" class="nav-link">Beli Paket</a></li>
+                            <li><a href="analisiscv.php" class="nav-link">Analisis CV</a></li>
+                            <li><a href="profil.php" class="nav-link">Profil</a></li>
+                            <li><a href="logout.php" class="nav-link">Keluar</a></li>
+                        <?php endif; ?>
+                    </ul>
+                </nav>
                     </div>
                 </div>
             </div>
