@@ -167,7 +167,7 @@ $result = $koneksi->query($query);
             </div>
             <div class="col-lg-3 col-md-6 mb-4">
                 <div class="post-entry-1 h-100 text-center">
-                    <img src="images/dinda.jpg" alt="Adinda Atzalia Ramadhanti Bukian" class="img-fluid rounded-circle mb-4">
+                    <img src="images/dinda.jpg" alt="Adinda Tzalia Ramadhanti Bukian" class="img-fluid rounded-circle mb-4">
                     <div class="post-entry-1-contents">
                         <h2>Adinda Atzalia Ramadhanti Bukian <p>(22523101)</p></h2>
                         <p>Front End Developer & Front End Engineer</p>
